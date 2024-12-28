@@ -148,7 +148,8 @@
 119. [`听书 - 专辑音乐列表`](#听书-专辑音乐列表)
 120. [`歌曲详情 - 歌曲成绩单`](#歌曲详情-歌曲成绩单)
 121. [`歌曲详情 - 歌曲成绩单详情`](#歌曲详情---歌曲成绩单详情)
-122. [`歌曲详情 - 歌曲成绩单详情`](#歌曲详情---歌曲成绩单详情V2)
+122. [`歌曲详情 - 歌曲成绩单详情V2`](#歌曲详情---歌曲成绩单详情V2)
+123. [`歌曲统计`](#歌曲统计)
 
 ### 安装
 
@@ -256,7 +257,7 @@ $ set HOST=127.0.0.1 && npm run dev
 !> 文档可能会有缓存 , 如果文档版本和 github 上的版本不一致,请清除缓存再查看
 
 #### 更新记录
-24-12-28：添加 歌曲成绩单详情 - V2接口。
+24-12-28：添加 歌曲成绩单详情 - V2接口;添加 歌曲统计接口。
 
 24-08-09：添加 获取更多音乐版本 接口。
 
@@ -2167,7 +2168,7 @@ fields: 支持多个，每个以逗号分隔，支持的值有：mkv,tags,h264,h
 **调用例子：** `/song/ranking/filter?album_audio_id=32155307`
 
 ### 歌曲详情 - 歌曲成绩单详情V2
-说明：登陆后调用此接口，可以获取更详细的歌曲成绩单信息
+说明：获取更详细的歌曲成绩单信息
 
 **必选参数：**
 
@@ -2176,6 +2177,53 @@ fields: 支持多个，每个以逗号分隔，支持的值有：mkv,tags,h264,h
 **接口地址：** `/song/ranking/v2`
 
 **调用例子：** `/song/ranking/v2?album_audio_id=32155307`
+
+
+### 歌曲统计
+说明：获取统计数据如累计播放()
+
+
+**必选参数：**
+
+`mixsongid`： 专辑音乐 id (album_audio_id/MixSongID 均可以),
+
+**接口地址：** `/song/statistics`
+
+**调用例子：** `/song/statistics?mixsongid=129646547`
+
+**返回例子：**
+```json
+{
+  "status": 1,
+  "errcode": 0,
+  "error": "",
+  "data": {
+    "song_name": "你的酒馆对我打了烊",
+    "scid": 49714781,
+    "singer_name": "陈雪凝",
+    "album_cover": "http://imge.kugou.com/stdmusic/{size}/20241021/20241021140832461577.jpg",
+    "is_recommend": 0,
+    "has_history": 0,
+    "user_play_uv": 0,
+    "user_transfer_uv": 0,
+    "user_forward_pv": 0,
+    "play_uv": 2259,
+    "transfer_uv": 133,
+    "recommend_pv": 6
+  }
+}
+```
+**data 字段说明：**
+| 字段 | 说明 |
+| --- | --- |
+| song_name | 歌曲名 |
+| singer_name | 歌手名 |
+| album_cover | 专辑封面 |
+| is_recommend | 是否推荐 |
+| has_history | 是否有历史记录 |
+| play_uv | 播放量 |
+| transfer_uv | 转发量 |
+| recommend_pv | 推荐量 |
 
 ## License
 
